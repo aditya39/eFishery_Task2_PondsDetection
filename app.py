@@ -1,4 +1,5 @@
 import yaml
+import os
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -6,10 +7,9 @@ import streamlit.components.v1 as components
 from ultralytics import YOLO
 from clearml import InputModel
 from segment import segment
+from generateMap import getSatelliteImage
 
-
-from map import getSatelliteImage
-
+os.environ['CLEARML_CONFIG_FILE'] = "clearml.conf"
 
 # Open Config File
 with open("config.yaml", "r") as ymlfile:
@@ -24,7 +24,7 @@ with st.sidebar:
     # Create select box to select YOLOv8 model
     st.header("Choose a Model")
     selectModel = st.selectbox("What YOLOv8 model you would like to choose?", 
-                               ("YOLOv8 Nano", "YOLOv8 Small", "YOLOv8 Medium","YOLOv8 Large", "YOLOv8 Xtreme"))
+                               ("YOLOv8 Nano", "YOLOv8 Small", "YOLOv8 Medium","YOLOv8 Large"))
 
     # If model selected, pick the model from ClearML IDModel
     if selectModel == "YOLOv8 Nano":
@@ -79,12 +79,16 @@ with st.container():
             image, error, message = getSatelliteImage(float(latitude), float(longitude))
             ponds_dict, countListDetected, img_yolo = segment(image, model, float(latitude), zoomLevel=18)
             st.success('Success!', icon="✅")
+            st.subheader("Detection Result")
 
             col1,col2 = st.columns(2)
             with col1:
                 st.image(image)
+                st.markdown("<p style='text-align: center; color: white;'>Ponds</p>", unsafe_allow_html=True)
             with col2:
                 st.image(img_yolo)
+                st.markdown("<p style='text-align: center; color: white;'>Ponds Detected by YOLOv8 Segmentation</p>", unsafe_allow_html=True)
+         
 
             # Create container for result of detection 
             with st.container():
