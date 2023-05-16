@@ -33,7 +33,7 @@ Here is the instruction about how to install and run the program.
 ### PYTHON USAGE
 1. Clone this git repo, you can download or use commmand below
 ```
-git clone https://github.com/fulankun1412/Vibrio-YOLOv8-Lanang-eFishery.git
+git clone https://github.com/aditya39/eFishery_Task2_PondsDetection.git
 ```
 2. Install depedency (Recommend to create Virtual Environtment first before doing this step)
    Enter the project directory then run this command in CLI like CMD:
@@ -47,15 +47,19 @@ streamlit run app.py
 5. Browser will automatically open, if not, type localhost:8501 to broweser address. Web application page will be open.
 
 ### DOCKER COMPOSE
-1. Kloning repositori ini: Gunakan perintah git clone untuk mengkloning repositori ini ke direktori lokal.
+1. Clone this git repository by run command below.
 ```
-git clone https://github.com/fulankun1412/Vibrio-YOLOv8-Lanang-eFishery.git
+git clone https://github.com/aditya39/eFishery_Task2_PondsDetection.git
 ```
-2. Jalankan perintah `docker-compose` ini untuk mulai build dan menjalankan langsung aplikasi
+2. To run the app, open CLI on the directory of the program and run this command.
 ```
 docker-compose up
 ```
-3. Buka browser internet dan masuk ke localhost:8501, aplikasi terbuka selamat mencoba.
+3. Wait to load and install depedency, after done you can go to browser and run localhost:8501, app should be running.
+4. To stop the docker, run this command.
+```
+docker-compose down
+```
 
 ## Demo
 ### Input gambar
