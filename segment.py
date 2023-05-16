@@ -12,6 +12,7 @@ frame_size = 640*640 # image input size
 
 # Object detection function, input is image & model
 def segment(file, model ,latitude, zoomLevel):
+    areaPixelToMeter = 0
     ponds_dict = {}
     image=file
 
