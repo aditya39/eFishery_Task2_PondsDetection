@@ -76,3 +76,6 @@ docker-compose down
 <p style="text-align: center">
   <img align="center" src="result.png" alt="eFishery">
 </p>
+<p style="text-align: center">
+  <img align="center" src="result2.png" alt="eFishery">
+</p>
