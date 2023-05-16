@@ -6,11 +6,10 @@ import streamlit.components.v1 as components
 from ultralytics import YOLO
 from clearml import InputModel
 from segment import segment
-from selenium import webdriver
-import time
+
 
 from map import getSatelliteImage
-from maps import maps_generator
+
 
 # Open Config File
 with open("config.yaml", "r") as ymlfile:
@@ -86,19 +85,21 @@ with st.container():
                 st.image(image)
             with col2:
                 st.image(img_yolo)
+
+            # Create container for result of detection 
+            with st.container():
+                st.header("Ponds Detection Result")
+                col1, col2, col3, col4 = st.columns(4)
+                with col1:
+                    st.metric("Total Ponds Detected", countListDetected[0])
+
+            #   print(ponds_dict)
+            ponds_table = pd.DataFrame.from_dict(ponds_dict,orient='index', columns=['Area'])
+            st.dataframe(ponds_table)
         except:
             pass
      
-    # Create container for result of detection 
-    with st.container():
-        st.header("Ponds Detection Result")
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("Total Ponds Detected", countListDetected[0])
-
-    #   print(ponds_dict)
-    ponds_table = pd.DataFrame.from_dict(ponds_dict,orient='index', columns=['Area'])
-    st.dataframe(ponds_table)
+    
                 
     
 

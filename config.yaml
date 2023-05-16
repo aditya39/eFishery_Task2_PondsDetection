@@ -1,9 +1,9 @@
 model:
-  yolov8n: "e51822862bb94a3e8b847cdad192f623"
-  yolov8s: "5194157e5ccc4bf2adbc08699da18757"
+  yolov8n: "6ec660bd7af54e3e80963795fcbf7101"
+  yolov8s: "4a0f53ad331b4db19a69994133d6510c"
   yolov8m: "4a0f53ad331b4db19a69994133d6510c"
   yolov8l: "f29e6d8caab149078d9da5773f210146"
-  yolov8x: "837adbe96442446ab893be14945ca8a5"
+  yolov8x: "f29e6d8caab149078d9da5773f210146"
 yolov8:
   conf: 0.5
   iou: 0.5
