@@ -13,10 +13,8 @@ frame_size = 640*640 # image input size
 # Object detection function, input is image & model
 def segment(file, model ,latitude, zoomLevel):
     ponds_dict = {}
-    
     image=file
-    
-    
+
     # Inference YOLOv8
     result = model.predict(
         source=image, # image input
@@ -38,18 +36,18 @@ def segment(file, model ,latitude, zoomLevel):
     masks = (result[0].masks.xy)
     count = int(len(masks))
 
-    METERS_PER_PX = (156543.03392 * math.cos(latitude * math.pi / 180) / math.pow(2, zoomLevel))
-    RATIO_PIXEL_TO_SQUARE_M = METERS_PER_PX*METERS_PER_PX
+    calculateAreaMaps = (156543.03392 * math.cos(latitude * math.pi / 180) / math.pow(2, zoomLevel))
+    areaPixelToMeter = calculateAreaMaps*calculateAreaMaps
     n=1
     for i in range(len(result)):
         for j in range(len(result[i].masks)):
             segmenPoly = result[i].masks[j].xy
-            
             x1 = int(result[i].boxes[j].xyxy[0][0])
             y1 = int(result[i].boxes[j].xyxy[0][1])
             x2 = int(result[i].boxes[j].xyxy[0][2])
             y2 = int(result[i].boxes[j].xyxy[0][3])
 
+            # Get the center point
             center_x = int((x1 + x2) / 2)
             center_y = int((y1 + y2) / 2)
 
@@ -61,10 +59,12 @@ def segment(file, model ,latitude, zoomLevel):
             pts = np.array(segmenPoly[0], np.int32)
             pts = pts.reshape((-1, 1, 2))
 
-            img = cv2.polylines(image, [pts], True, (255, 0, 0), 2)
+            # Create connected line of the area
+            img = cv2.polylines(image, [pts], True, (0, 255, 0), 2)
+            # Put number in detected area
             img = cv2.putText(img, f"{n}", (center_x, center_y), cv2.FONT_HERSHEY_PLAIN, 3 , (255,255,255), 5)
-            areaPX = cv2.contourArea(pts) * RATIO_PIXEL_TO_SQUARE_M
-
+            # Calculate real area
+            areaPX = cv2.contourArea(pts) * areaPixelToMeter
             ponds_dict[n] = areaPX
             n+=1
     
