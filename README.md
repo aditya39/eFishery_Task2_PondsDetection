@@ -1,4 +1,4 @@
-# eFishery_Task2_PondsDetection
+
 
 <div align="center" style="text-align: center">
 
@@ -8,24 +8,28 @@
 
 </div>
 
-# eFishery Task 3 - Vibrio Detection
+# eFishery Task 3 - Ponds Detection & Size Estimator
 <p> Hi.. </p>
-The purpose of this project is to be able detect, counting, and classifying vibrio bacteria with YOLOv8, well known as one of the DeepLearning object detection algorithm.
+The purpose of this project is to be able detect and estimate the size of ponds from a longitude and latitude data.
+<br>
 This is also part of take home test for applying Machine Learning Computer Vision Engineer in eFishery.
 
 ## Problem
-Mr. Joshua who is an Aquaculture Expert in the field of microbiology. At this time, he is in need of help to count the number of vibrio colonies because he is used to processing more or less 100 cups per day. Counting one cups consist dozens of different vibrio already a pain, imagine 100 cups. 
-Mr. Joshua need an alternative or automatic ways to do this painfull jobs.
+Gibran is a member of eFishery Point who was assigned to map 5 shrimp ponds in 5 different places in Indonesia in one day.
+<br>
+However, the distance between these 5 pools is far enough to be reached even if you use a land vehicle. So it is not possible to conduct surveys directly to the field.
+Gibran need a program that can detect and estimate size of the shirimp ponds by just giving the location coordiantes, by giving latitude and longitude data.
   
 ## Idea & Solution
-To make Mr. Joshua live easier, we create a web based platform to be able detect vibrio, classify & count.
-Deep learning approach were made to solved this problem, by using YOLOv8 (You Only Look Once version 8) we be able to detect, classify the size also color of the vibrio.
+To make Gibran live easier, we create a web based platform to be able detect shrimp ponds and estimate its size.
+Deep learning approach were made to solved this problem, by using YOLOv8 (You Only Look Once version 8) to segmented the shirmp ponds
 
   How it work
   1. Prepare the dataset, annotate the image, and export it into YOLOv8 format (I used Roboflow to do this).
   2. Train the pretrained models of YOLOv8 with our dataset (link train.ipynb).
   3. Use ClearML to tracks and controls the process, performance metrics, and model storing.
   4. Create the platform using streamlit and inference the image using the our trained model.
+  5. Make a calculation based on pixel and the actual map zoom level ratio.
   
 ## Installation and Usage
 Here is the instruction about how to install and run the program.
